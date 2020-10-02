@@ -1,61 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>dual</title>
-  <style>
-:root{
-    --pink: #FFBDF2;
-    --blue: #3E509D;
-}
+    <title>C010R5 demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-body{ 
-   padding: 0; 
-   margin: 0;
-}
-button{ 
-   position: absolute; 
-   top: 0; 
-   left: 0; 
-}
-  </style>
-</head>
-<body>
-  <div id="app">
-    <div></div>
-    <div></div>
-
-
-  <script type=module>
-    import { FoldablesFeature } from "./spanning-css-polyfill.js";
-
-    const colors = [ "--pink","--blue"];
-
-    function createLayoutSegments() {
-      const segments = getWindowSegments();
-
-      for (let [i, segment] of segments.entries()) {
-        const element = app.children[i];
-        element.style.display = "block";
-        element.style.background = 'var(' + colors[i] + ')';
-        element.style.position = 'absolute'
-        element.style.top = segment.top + 'px';
-        element.style.left = segment.left + 'px';
-        element.style.width = segment.width  + 'px';
-        element.style.height = segment.height  + 'px';
-      }
-
-      if (segments.length == 1) {
-        app.children[1].style.display = "none";
-      }
+<style>
+    *{
+        box-sizing: border-box;
     }
 
-    const foldablesFeat = new FoldablesFeature;
-    foldablesFeat.onchange = createLayoutSegments;
-    foldablesFeat.foldSize = '24';
-    createLayoutSegments();
-  </script>
+    body,html{
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .wrapper{
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+
+    .col1{
+        flex: 0 0 200px;
+        background-color: lightgray;
+        transition: background-color 0.2s linear;
+    }
+
+    .col2{
+        flex: 1;
+        background-color: papayawhip;
+        transition: background-color 0.2s linear;
+    }
+
+    .col1:before{
+        content: 'not spanning';
+    }
+
+    .col2:before{
+        content: 'not spanning';
+    }
+
+@media (screen-spanning: single-fold-vertical){
+    .col1{
+        flex: 0 0 env(fold-left);
+        margin-right: env(fold-width);
+    }
+
+    .col1:before{
+        content: "screen-spanning single-fold-vertical";
+    }
+
+    .col2:before {
+          content: "screen-spanning single-fold-vertical";
+        }
+}
+
+@media (screen-spanning: single-fold-horizontal){
+    .wrapper{
+        flex-direction: column;
+    }
+
+    .col1{
+        flex: 0 0 env(fold-top);
+        margin-bottom: env(fold-height);
+    }
+
+    .col1:before {
+          content: "screen-spanning single-fold-horizontal";
+    }
+        .col2:before {
+          content: "screen-spanning single-fold-horizontal";
+    }
+}
+
+@media (screen-spanning: none){
+    .col1:before {
+          content: "screen-spanning:none";
+    }
+
+        .col2:before {
+          content: "screen-spanning:none";
+    }
+}
+</style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="col1"></div>
+        <div class="col2"></div>
+    </div>
 </body>
 </html>
