@@ -18,3 +18,8 @@
 # 2: Экранчики [demo](https://diananeumann.github.io/Web-For-Foldable-Devices/c01o5s/index.html)
 ![withme](https://user-images.githubusercontent.com/56086653/94929231-7acd1700-04cd-11eb-9c4a-2df7459c57a3.PNG)
 
+# 3: Искусство [demo](https://diananeumann.github.io/Foldable-Gallery/index.html)
+## https://github.com/DianaNeumann/Foldable-Gallery
+![2](https://user-images.githubusercontent.com/56086653/95206797-ca725200-07ef-11eb-9312-d3cbc5d48874.PNG)
+
+
